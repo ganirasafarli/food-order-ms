@@ -1,0 +1,42 @@
+[
+  {
+    "cardNumber": "12345678",
+    "balance": 100.50
+  },
+  {
+    "cardNumber": "87654321",
+    "balance": 250.75
+  },
+  {
+    "cardNumber": "11223344",
+    "balance": 300.00
+  },
+  {
+    "cardNumber": "44332211",
+    "balance": 150.25
+  },
+  {
+    "cardNumber": "55667788",
+    "balance": 200.00
+  },
+  {
+    "cardNumber": "88776655",
+    "balance": 350.10
+  },
+  {
+    "cardNumber": "33445566",
+    "balance": 400.00
+  },
+  {
+    "cardNumber": "66554433",
+    "balance": 450.75
+  },
+  {
+    "cardNumber": "77889900",
+    "balance": 500.50
+  },
+  {
+    "cardNumber": "00998877",
+    "balance": 550.25
+  }
+]

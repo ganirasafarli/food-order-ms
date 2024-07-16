@@ -1,0 +1,41 @@
+{
+  "id": "6693ce727eb0be54a5a34534",
+  "burgers": [
+    {
+      "name": "Cheeseburger",
+      "type": "Beef",
+      "price": 5.99
+    },
+    {
+      "name": "Veggie Burger",
+      "type": "Vegetarian",
+      "price": 4.99
+    }
+  ],
+  "date": "2024-07-14T13:11:14.131+00:00",
+  "drinks": [
+    {
+      "name": "Coca Cola",
+      "type": "Soft Drink",
+      "price": 1.99
+    },
+    {
+      "name": "Lemonade",
+      "type": "Soft Drink",
+      "price": 1.99
+    }
+  ],
+  "salads": [
+    {
+      "name": "Caesar Salad",
+      "type": "Chicken",
+      "price": 6.99
+    },
+    {
+      "name": "Garden Salad",
+      "type": "Vegetarian",
+      "price": 5.49
+    }
+  ],
+  "title": "Menu"
+}
