@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class FoodService {
     private final FoodRepository foodRepository;
     private final PaymentRepository paymentRepository;
+    private final KafkaProducerService kafkaProducerService;
 
     public Menu showMenu() {
         return foodRepository.showMenu();
@@ -37,9 +38,11 @@ public class FoodService {
         else if (bill > balance) {
             return new OrderResponse("You do not have enough amount in your bank account.");
         } else if (bill <= balance) {
-             balance = balance - bill;
+            balance = balance - bill;
             payment.setBalance(balance);
             paymentRepository.updateBalanceByCardNumber(payment.getCardNumber(), payment.getBalance());
+            String foodNames = String.join(",", orderRequest.getNames());
+            kafkaProducerService.sendFoodNames(foodNames);
             return new OrderResponse("Your order is in progress.");
         }
         return null;
