@@ -1,8 +1,9 @@
 package com.samganira.food_order_ms.service;
 
+import com.samganira.food_order_ms.mapper.KafkaStatus;
 import com.samganira.food_order_ms.mapper.Menu;
 import com.samganira.food_order_ms.mapper.entity.Payment;
-import com.samganira.food_order_ms.mapper.request.OrderRequest;
+import com.samganira.food_order_ms.mapper.dto.OrderDTO;
 import com.samganira.food_order_ms.mapper.response.OrderResponse;
 import com.samganira.food_order_ms.repository.FoodRepository;
 import com.samganira.food_order_ms.repository.PaymentRepository;
@@ -21,16 +22,16 @@ public class FoodService {
         return foodRepository.showMenu();
     }
 
-    public OrderResponse orderFood(OrderRequest orderRequest) {
+    public OrderResponse orderFood(OrderDTO orderDTO) {
         double bill = 0.0;
         Menu menu = foodRepository.showMenu();
-        for (String name : orderRequest.getNames()) {
+        for (String name : orderDTO.getFoodNames()) {
             Double priceForItem = getPriceForItem(name, menu);
             if (priceForItem != null) {
                 bill = bill + priceForItem;
             }
         }
-        Payment payment = orderRequest.getPayment();
+        Payment payment = orderDTO.getPayment();
         boolean existsByCardNumber = paymentRepository.existsByCardNumber(payment.getCardNumber());
         Double balance = paymentRepository.retrieveBalanceByCard(payment.getCardNumber());
         if (!existsByCardNumber)
@@ -41,8 +42,7 @@ public class FoodService {
             balance = balance - bill;
             payment.setBalance(balance);
             paymentRepository.updateBalanceByCardNumber(payment.getCardNumber(), payment.getBalance());
-            String foodNames = String.join(",", orderRequest.getNames());
-            kafkaProducerService.sendFoodNames(foodNames);
+            kafkaProducerService.sendFoodNames(orderDTO);
             return new OrderResponse("Your order is in progress.");
         }
         return null;

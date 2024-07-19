@@ -14,7 +14,7 @@ public class Payment {
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
-    @JoinColumn(name = "card_number")
+    @Column(name = "card_number")
     private String cardNumber;
     private Double balance;
 }
